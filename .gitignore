@@ -1,0 +1,24 @@
+# Data, intermediate products and working trees (keep $PRC_ROOT outside the repository)
+/raw/
+/ext/
+/crop/
+/work/
+*.parquet
+*.npy
+*.npz
+*.tar
+*.tar.*
+*.part
+*.cbm
+*.READY
+
+# Outputs, logs, caches
+/output/
+logs/
+_done/
+*.log
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.DS_Store

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Taxi-out time prediction for ten European airports (PRC Data Challenge 2026)"
+type: software
+authors:
+  - family-names: "Jing"
+    given-names: "Jiawei"
+    affiliation: "Makuhari Development Corporation"
+repository-code: "https://github.com/ibarapascal/prc-data-challenge-2026-taxi-out"
+license: GPL-3.0-or-later
+keywords:
+  - taxi-out time
+  - airport operations
+  - ADS-B
+  - gradient boosting
+  - PRC Data Challenge 2026
+abstract: >-
+  Code and method description of a taxi-out time prediction pipeline for ten
+  European airports: a LightGBM/CatBoost baseline of two averaged ensembles,
+  an ADS-B ground-trajectory residual layer, a shrunken tabular correction
+  term, a label-free drift gate, and documented validation rules. Two
+  competition-specific post-processing rules are implemented as disabled
+  options and are not part of the submitted predictions.

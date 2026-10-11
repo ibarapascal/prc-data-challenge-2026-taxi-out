@@ -1,0 +1,49 @@
+{
+ "_doc": "Baseline on the final files (test months 2026-01/02/06/07), 3 CatBoost seeds in ensemble B. Rebuilds the feature store and retrains all members of ensemble A (block ensa) and ensemble B (block ensb), saving models, then writes the averaged baseline rint((A+B)/2). Edit every /path/to/prc-root entry before running. ref.subs is optional and only feeds the diagnostic compare stage.",
+ "raw_dir": "/path/to/prc-root/raw",
+ "train_glob": "training_{year}-{mm}-01_*.parquet",
+ "train_year": 2025,
+ "train_months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+ "rank_file": "final_ranking.parquet",
+ "submit_file": "final_submitting.parquet",
+ "test_months": ["2026-01", "2026-02", "2026-06", "2026-07"],
+ "ext_dir": "/path/to/prc-root/ext",
+ "work": "/path/to/prc-root/rerun/final_20261008",
+ "python": "/path/to/prc-root/.venv/bin/python",
+ "threads": 6,
+ "env_override": {
+  "LOWMEM": "1",
+  "FEAT_SPLIT": "1"
+ },
+ "_env_override_doc": "LOWMEM=1 reduces memory (float32 inputs). FEAT_SPLIT=1 computes rank-type features per calendar month; required when several test months are stored in one ranking file, and consistent with the training side (one file per month).",
+ "iter_source": "/path/to/prc-root/night2/results.tsv",
+ "expect_iters": {
+  "sr_g5": [1757, 1836],
+  "sr": [489, 886],
+  "srp_g5": [919, 1714]
+ },
+ "ensa": {
+  "tag": "ensa_final",
+  "weights": {"sr_g5_delta": 0.167, "cat_delta": 0.333, "anc_iobt": 0.167, "apt_delta": 0.167, "lirf2_over": 0.167},
+  "env": {"NSEED": "1", "CATSEED": "1"},
+  "lgb_members": ["sr_g5_delta", "apt_delta", "anc_iobt", "lirf2_over"],
+  "cat_member": "cat_delta"
+ },
+ "ensb": {
+  "tag": "ensb_3seed",
+  "weights": {"srp_g5_delta": 0.429, "cat_delta": 0.286, "anc_iobt": 0.143, "apt_delta": 0.143},
+  "env": {"PI": "1", "NSEED": "3", "CATSEED": "3"},
+  "lgb_members": ["srp_g5_delta"],
+  "cat_member": "cat_delta",
+  "reuse_from": {"arm": "ensa", "members": ["anc_iobt", "apt_delta"]}
+ },
+ "ensavg_tag": "ensavg_3seed",
+ "ensavg_check": false,
+ "ref": {
+  "subs": {
+   "ensa": "/path/to/prc-root/sub/upstanding-firefly_v5.parquet",
+   "ensb": "/path/to/prc-root/sub/upstanding-firefly_v6.parquet",
+   "ensavg": "/path/to/prc-root/sub/upstanding-firefly_v8.parquet"
+  }
+ }
+}

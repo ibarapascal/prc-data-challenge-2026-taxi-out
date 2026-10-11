@@ -1,0 +1,13 @@
+airports.json - licence notice
+
+airports.json (airport boxes, runway and stand positions for EDDF, EDDM, EGLL, EHAM, LEBL, LEMD,
+LFPG, LIRF, LSZH, LTFM) is a database derived from OpenStreetMap data.
+
+Contains information from OpenStreetMap, (c) OpenStreetMap contributors, which is made available
+under the Open Database License (ODbL) 1.0: https://opendatacommons.org/licenses/odbl/1-0/
+
+This derived database is made available under the Open Database License (ODbL) 1.0.
+Any rights in individual contents of the database are licensed under the Database Contents License:
+https://opendatacommons.org/licenses/dbcl/1-0/
+
+The GPL-3.0-or-later licence of this repository's code does not apply to airports.json.
